@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "289161820678",
+    "firebase_url": "https://dragondebarrancabermeja-default-rtdb.firebaseio.com",
+    "project_id": "dragondebarrancabermeja",
+    "storage_bucket": "dragondebarrancabermeja.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:289161820678:android:a0c6e94289686ef61c6187",
+        "android_client_info": {
+          "package_name": "com.DefaultCompany.DragonBarrancabermeja"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRVJLdAgUa1htxa2nQmkHJ2FOXUgfiisc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

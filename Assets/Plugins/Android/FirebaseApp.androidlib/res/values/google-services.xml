@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:keep="@string/firebase_database_url,@string/gcm_defaultSenderId,@string/google_storage_bucket,@string/project_id,@string/google_api_key,@string/google_crash_reporting_api_key,@string/google_app_id">
+  <string name="firebase_database_url" translatable="false">https://dragondebarrancabermeja-default-rtdb.firebaseio.com</string>
+  <string name="gcm_defaultSenderId" translatable="false">289161820678</string>
+  <string name="google_storage_bucket" translatable="false">dragondebarrancabermeja.appspot.com</string>
+  <string name="project_id" translatable="false">dragondebarrancabermeja</string>
+  <string name="google_api_key" translatable="false">AIzaSyCRVJLdAgUa1htxa2nQmkHJ2FOXUgfiisc</string>
+  <string name="google_crash_reporting_api_key" translatable="false">AIzaSyCRVJLdAgUa1htxa2nQmkHJ2FOXUgfiisc</string>
+  <string name="google_app_id" translatable="false">1:289161820678:android:a0c6e94289686ef61c6187</string>
+</resources>

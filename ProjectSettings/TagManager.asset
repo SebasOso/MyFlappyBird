@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - win
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - BackGropund
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: ButtomsMenu
+    uniqueID: 875289471
+    locked: 0
+  - name: Background
+    uniqueID: 2888406311
+    locked: 0
+  - name: Player
+    uniqueID: 2276124899
+    locked: 0
+  - name: Obstacles
+    uniqueID: 1692335111
+    locked: 0
+  - name: Default
+    uniqueID: 0
+    locked: 0
