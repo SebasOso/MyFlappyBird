@@ -156,8 +156,6 @@ public class FirebaseManager : MonoBehaviour
             warningLoginText.text = "";
             confirmLoginText.text = "Logged in!";
 
-            StartCoroutine(UpdateUsernameAuth(PlayerPrefs.GetString("username")));
-            StartCoroutine(UpdateUsernameDatabase(PlayerPrefs.GetString("username")));
             if(isFisrstTime == true)
             {
                 StartCoroutine(StartPoints());
