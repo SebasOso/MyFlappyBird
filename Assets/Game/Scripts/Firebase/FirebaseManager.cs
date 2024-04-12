@@ -164,7 +164,6 @@ public class FirebaseManager : MonoBehaviour
             else
             {
                 StartCoroutine(UpdatePoints(PlayerPrefs.GetInt("points")));
-                
             }
 
             //Save player data
