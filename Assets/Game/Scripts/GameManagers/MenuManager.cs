@@ -18,4 +18,8 @@ public class MenuManager : MonoBehaviour
         scoreBoardContent.transform.position = new Vector3(scoreBoardContent.transform.position.x, -1584.931f, 0f);
         FirebaseManager.Instance.LoadScoreBoard(scoreBoardContent, scoreElement);
     }
+    public void LogOutAndLoadScreen()
+    {
+        FirebaseManager.Instance.LogOutButton();
+    }
 }

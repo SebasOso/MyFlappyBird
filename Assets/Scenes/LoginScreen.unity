@@ -662,9 +662,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1271168306}
-        m_TargetAssemblyTypeName: AuthManager, Assembly-CSharp
-        m_MethodName: LoginAgainButtom
+      - m_Target: {fileID: 1990107953}
+        m_TargetAssemblyTypeName: LoginScreenManager, Assembly-CSharp
+        m_MethodName: LoginAgainButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2561,37 +2561,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 488531451}
   m_CullTransparentMesh: 1
---- !u!1 &518738837
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 518738838}
-  m_Layer: 0
-  m_Name: DataUserManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &518738838
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 518738837}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &537802568
 GameObject:
   m_ObjectHideFlags: 0
@@ -6576,18 +6545,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   logged: 0
-  loginAgainButtom: {fileID: 112543040}
   dependencyStatus: 0
-  emailLoginField: {fileID: 410357882}
-  passwordLoginField: {fileID: 1971041534}
-  confirmLoginText: {fileID: 1780923039}
-  warningLoginText: {fileID: 1780923039}
-  userRegisterField: {fileID: 1146286549}
-  emailRegisterField: {fileID: 226377040}
-  passwordRegisterField: {fileID: 191135970}
-  passwordConfirmRegisterField: {fileID: 28102666}
-  warningRegisterText: {fileID: 2040140015}
-  warning: {fileID: 370177141}
 --- !u!4 &1271168307
 Transform:
   m_ObjectHideFlags: 0
@@ -6595,52 +6553,6 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1271168305}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1273059701
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1273059703}
-  - component: {fileID: 1273059702}
-  m_Layer: 0
-  m_Name: MenuManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1273059702
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1273059701}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35eee22c5a5b7c5438acfbd9ff342c0a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scoreBoardContent: {fileID: 0}
-  scoreElement: {fileID: 0}
---- !u!4 &1273059703
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1273059701}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -9414,8 +9326,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1271168306}
-        m_TargetAssemblyTypeName: AuthManager, Assembly-CSharp
+      - m_Target: {fileID: 1990107953}
+        m_TargetAssemblyTypeName: LoginScreenManager, Assembly-CSharp
         m_MethodName: LoginButtom
         m_Mode: 1
         m_Arguments:
@@ -9873,6 +9785,62 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1980078280}
   m_CullTransparentMesh: 1
+--- !u!1 &1990107952
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1990107954}
+  - component: {fileID: 1990107953}
+  m_Layer: 0
+  m_Name: LoginScreenManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1990107953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1990107952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04acdf1cd1d9d7d4197d6a69d2b30ce8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  emailLoginField: {fileID: 410357882}
+  passwordLoginField: {fileID: 1971041534}
+  confirmLoginText: {fileID: 1780923039}
+  warningLoginText: {fileID: 1780923039}
+  loginAgainButtom: {fileID: 112543040}
+  userRegisterField: {fileID: 1146286549}
+  emailRegisterField: {fileID: 226377040}
+  passwordRegisterField: {fileID: 191135970}
+  passwordConfirmRegisterField: {fileID: 28102666}
+  warningRegisterText: {fileID: 2040140015}
+  warning: {fileID: 370177141}
+  checkRegister: {fileID: 1921406546}
+--- !u!4 &1990107954
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1990107952}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1993658584
 GameObject:
   m_ObjectHideFlags: 0
@@ -10336,8 +10304,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1271168306}
-        m_TargetAssemblyTypeName: AuthManager, Assembly-CSharp
+      - m_Target: {fileID: 1990107953}
+        m_TargetAssemblyTypeName: LoginScreenManager, Assembly-CSharp
         m_MethodName: RegisterButtom
         m_Mode: 1
         m_Arguments:
@@ -10347,18 +10315,6 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1921406546}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
         m_CallState: 2
 --- !u!222 &2028377821
 CanvasRenderer:
@@ -11242,6 +11198,5 @@ SceneRoots:
   - {fileID: 1650576060}
   - {fileID: 1554758181}
   - {fileID: 608273699}
-  - {fileID: 1273059703}
   - {fileID: 1931732621}
-  - {fileID: 518738838}
+  - {fileID: 1990107954}

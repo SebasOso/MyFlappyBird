@@ -13,26 +13,13 @@ public class FirebaseManager : MonoBehaviour
     public static FirebaseManager Instance {  get; private set; }
 
     [Header("User Save")]
-    [SerializeField] private bool logged = false;
-    [SerializeField] private GameObject loginAgainButtom;
+    [SerializeField] public bool logged = false;
 
     [Header("Firebase")]
     public DependencyStatus dependencyStatus;
     public FirebaseAuth auth;
     public FirebaseUser user;
     public DatabaseReference database;
-    [Header("Login")]
-    public TMP_InputField emailLoginField;
-    public TMP_InputField passwordLoginField;
-    public TMP_Text confirmLoginText;
-    public TMP_Text warningLoginText;
-    [Header("Register")]
-    public TMP_InputField userRegisterField;
-    public TMP_InputField emailRegisterField;
-    public TMP_InputField passwordRegisterField;
-    public TMP_InputField passwordConfirmRegisterField;
-    public TMP_Text warningRegisterText;
-    public GameObject warning;
 
     private void Awake()
     {
@@ -62,16 +49,11 @@ public class FirebaseManager : MonoBehaviour
     }
     private void Start()
     {
-        if(loginAgainButtom == null) { return; }
+        if(user == null)
+        {
+            Debug.Log("User is null");
+        }
         logged = PlayerPrefs.GetInt("logged") == 1;
-        if(logged == true)
-        {
-            loginAgainButtom.SetActive(true);
-        }
-        else
-        {
-            loginAgainButtom.SetActive(false);
-        }
     }
     private void InitializeFirebase()
     {
@@ -79,36 +61,19 @@ public class FirebaseManager : MonoBehaviour
         auth = FirebaseAuth.DefaultInstance;
         database = FirebaseDatabase.DefaultInstance.RootReference;
     }
-    public void ClearLoginFields()
+    public void LogOutButton()
     {
-        emailLoginField.text = "";
-        passwordLoginField.text = "";
+        LogOut();
+        StartCoroutine(StartLoginScreen());
     }
-    public void ClearRegisterFields()
-    {
-        emailRegisterField.text = "";
-        userRegisterField.text = "";
-        passwordRegisterField.text = "";
-        passwordConfirmRegisterField.text = "";
-    }
-    public void LoginAgainButtom()
-    {
-        StartCoroutine (LoginAgain());
-    }
-    public void LoginButtom()
-    {
-        StartCoroutine(Login(emailLoginField.text, passwordLoginField.text, false));
-    }
-    public void RegisterButtom()
-    {
-        StartCoroutine(Register(emailRegisterField.text, passwordRegisterField.text, userRegisterField.text));
-    }
-    private IEnumerator LoginAgain()
+
+    //LOG COURUTINES
+    public IEnumerator LoginAgain(TMP_Text confirmLoginText, TMP_Text warningLoginText)
     {
         yield return new WaitForSeconds(2f);
-        StartCoroutine(Login(PlayerPrefs.GetString("email"), PlayerPrefs.GetString("password"), false));
+        StartCoroutine(Login(PlayerPrefs.GetString("email"), PlayerPrefs.GetString("password"), false, confirmLoginText, warningLoginText));
     }
-    private IEnumerator Login(string _email, string _password, bool isFisrstTime)
+    public IEnumerator Login(string _email, string _password, bool isFisrstTime, TMP_Text confirmLoginText, TMP_Text warningLoginText)
     {
         if (auth != null)
         {
@@ -158,9 +123,7 @@ public class FirebaseManager : MonoBehaviour
 
             if(isFisrstTime == true)
             {
-                StartCoroutine(StartPoints());
-               
-            }
+                StartCoroutine(StartPoints());            }
             else
             {
                 StartCoroutine(UpdatePoints(PlayerPrefs.GetInt("points")));
@@ -174,14 +137,30 @@ public class FirebaseManager : MonoBehaviour
             StartCoroutine(StartMainMenu());
         }
     }
-
-    private IEnumerator StartMainMenu()
+    private void LogOut()
+    {
+        if(auth != null && user != null)
+        {
+            auth.SignOut();
+        }
+    }
+    public IEnumerator StartLoginScreen()
+    {
+        yield return new WaitForSeconds(1f);
+        if(user == null)
+        {
+            Debug.Log("User is null");
+        }
+        SceneManager.LoadScene(0);
+    }
+    public IEnumerator StartMainMenu()
     {
         yield return new WaitForSeconds(2);
         SceneManager.LoadScene(1);
     }
 
-    private IEnumerator Register(string _email, string _password, string _userName)
+    //REGISTER COURUTINES
+    public IEnumerator Register(string _email, string _password, string _userName, TMP_Text warningRegisterText, TMP_InputField passwordRegisterField, TMP_InputField passwordConfirmRegisterField, TMP_Text confirmLoginText, TMP_Text warningLoginText, GameObject checkRegister, GameObject warningRegister)
     {
         if(database == null)
         {
@@ -189,10 +168,14 @@ public class FirebaseManager : MonoBehaviour
         }
         if (_userName == "")
         {
+            checkRegister.SetActive(false);
+            warningRegister.SetActive(true);
             warningRegisterText.text = "Missing Username";
         }
         else if (passwordRegisterField.text != passwordConfirmRegisterField.text)
         {
+            checkRegister.SetActive(false);
+            warningRegister.SetActive(true);
             warningRegisterText.text = "Passwords does not match!";
         }
         else
@@ -202,6 +185,8 @@ public class FirebaseManager : MonoBehaviour
             if (registerTask.Exception != null)
             {
                 //If there are errors, handle them
+                warningRegister.SetActive(true);
+                checkRegister.SetActive(false);
                 Debug.LogWarning(message: $"Failed to register task with {registerTask.Exception}");
                 FirebaseException firebaseEx = registerTask.Exception.GetBaseException() as FirebaseException;
                 AuthError errorCode = (AuthError)firebaseEx.ErrorCode;
@@ -221,12 +206,15 @@ public class FirebaseManager : MonoBehaviour
                         message = "Email Already In Use";
                         break;
                 }
+                checkRegister.SetActive(false);
+                warningRegister.SetActive(true);
                 warningRegisterText.text = message;
             }
             else
             {
                 //User has now been created
                 //Now get result
+                checkRegister.SetActive(true);
                 user = registerTask.Result.User;
                 if (user != null)
                 {
@@ -249,19 +237,20 @@ public class FirebaseManager : MonoBehaviour
                         PlayerPrefs.SetString("username", _userName);
 
                         StartCoroutine(UpdateUsernameDatabase(_userName));
-                        StartCoroutine(LoginAfterRegister(_email, _password));
+                        StartCoroutine(LoginAfterRegister(_email, _password, confirmLoginText, warningLoginText));
                     }
                 }
             }
         }
     }
 
-    private IEnumerator LoginAfterRegister(string email, string password)
+    public IEnumerator LoginAfterRegister(string email, string password, TMP_Text confirmLoginText, TMP_Text warningLoginText)
     {
         yield return new WaitForSeconds(3);
-        StartCoroutine(Login(email, password, true));
+        StartCoroutine(Login(email, password, true, confirmLoginText, warningLoginText));
     }
 
+    //UPDATE USERNAME, START POINTS, START USERNAME
     private IEnumerator UpdateUsernameAuth(string username)
     {
         if (user == null)
@@ -318,6 +307,8 @@ public class FirebaseManager : MonoBehaviour
             //Database points are updated
         }
     }
+
+    //UPDATE POINTS WHEN PLAYING
     private IEnumerator UpdatePoints(int points)
     {
         //Taking data from the actual user
@@ -346,6 +337,8 @@ public class FirebaseManager : MonoBehaviour
     {
         StartCoroutine(UpdatePoints(points));
     }
+
+    //LOAD SCORE BOARD
     public void LoadScoreBoard(Transform scoreboardContent, GameObject scoreElement)
     {
         StartCoroutine(LoadScoreboardData(scoreboardContent, scoreElement));
