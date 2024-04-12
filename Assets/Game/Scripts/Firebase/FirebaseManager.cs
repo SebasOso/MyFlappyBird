@@ -159,10 +159,12 @@ public class FirebaseManager : MonoBehaviour
             if(isFisrstTime == true)
             {
                 StartCoroutine(StartPoints());
+               
             }
             else
             {
                 StartCoroutine(UpdatePoints(PlayerPrefs.GetInt("points")));
+                
             }
 
             //Save player data
@@ -247,6 +249,7 @@ public class FirebaseManager : MonoBehaviour
                         PlayerPrefs.SetInt("points", 0);
                         PlayerPrefs.SetString("username", _userName);
 
+                        StartCoroutine(UpdateUsernameDatabase(_userName));
                         StartCoroutine(LoginAfterRegister(_email, _password));
                     }
                 }
