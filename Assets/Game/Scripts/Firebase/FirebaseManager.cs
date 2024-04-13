@@ -8,6 +8,7 @@ using System;
 using UnityEngine.SceneManagement;
 using System.Linq;
 using System.Threading.Tasks;
+using Firebase.Extensions;
 public class FirebaseManager : MonoBehaviour
 {
     public static FirebaseManager Instance {  get; private set; }
@@ -157,6 +158,29 @@ public class FirebaseManager : MonoBehaviour
     {
         yield return new WaitForSeconds(2);
         SceneManager.LoadScene(1);
+    }
+    public void ForgetPasswordSubmit(string forgetPassordEmail, TMP_Text forgetPasswordWarning)
+    {
+        auth.SendPasswordResetEmailAsync(forgetPassordEmail).ContinueWithOnMainThread(task => 
+        {
+            if(task.IsCanceled)
+            {
+                Debug.LogError("Send Password was canceled");
+            }
+            if(task.IsFaulted)
+            {
+                foreach(Exception exception in task.Exception.Flatten().InnerExceptions)
+                {
+                    Firebase.FirebaseException firebaseException = exception as FirebaseException;
+                    if(firebaseException != null)
+                    {
+                        var errorCode = (AuthError)firebaseException.ErrorCode;
+                        forgetPasswordWarning.text = errorCode.ToString();
+                    }
+                }
+            }
+            forgetPasswordWarning.text = "Succesfully Send Email for Reset Password";
+        });
     }
 
     //REGISTER COURUTINES
