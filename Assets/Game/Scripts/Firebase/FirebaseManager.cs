@@ -13,9 +13,6 @@ public class FirebaseManager : MonoBehaviour
 {
     public static FirebaseManager Instance {  get; private set; }
 
-    [Header("User Save")]
-    [SerializeField] public bool logged = false;
-
     [Header("Firebase")]
     public DependencyStatus dependencyStatus;
     public FirebaseAuth auth;
@@ -54,7 +51,6 @@ public class FirebaseManager : MonoBehaviour
         {
             Debug.Log("User is null");
         }
-        logged = PlayerPrefs.GetInt("logged") == 1;
     }
     private void InitializeFirebase()
     {
@@ -69,11 +65,6 @@ public class FirebaseManager : MonoBehaviour
     }
 
     //LOG COURUTINES
-    public IEnumerator LoginAgain(TMP_Text confirmLoginText, TMP_Text warningLoginText)
-    {
-        yield return new WaitForSeconds(2f);
-        StartCoroutine(Login(PlayerPrefs.GetString("email"), PlayerPrefs.GetString("password"), false, confirmLoginText, warningLoginText));
-    }
     public IEnumerator Login(string _email, string _password, bool isFisrstTime, TMP_Text confirmLoginText, TMP_Text warningLoginText)
     {
         if (auth != null)
@@ -129,11 +120,6 @@ public class FirebaseManager : MonoBehaviour
             {
                 StartCoroutine(UpdatePoints(PlayerPrefs.GetInt("points")));
             }
-
-            //Save player data
-            PlayerPrefs.SetString("email", _email);
-            PlayerPrefs.SetString("password", _password);
-            PlayerPrefs.SetInt("logged", 1);
 
             StartCoroutine(StartMainMenu());
         }
@@ -257,9 +243,6 @@ public class FirebaseManager : MonoBehaviour
                         
                         warningRegisterText.text = "";
 
-                        PlayerPrefs.SetInt("points", 0);
-                        PlayerPrefs.SetString("username", _userName);
-
                         StartCoroutine(UpdateUsernameDatabase(_userName));
                         StartCoroutine(LoginAfterRegister(_email, _password, confirmLoginText, warningLoginText));
                     }
@@ -351,7 +334,6 @@ public class FirebaseManager : MonoBehaviour
             int currentPoints = int.Parse(snapshot.Child("points").Value.ToString());
             if(currentPoints < points)
             {
-                PlayerPrefs.SetInt("points", points);
                 database.Child("users").Child(user.UserId).Child("points").SetValueAsync(points);
             }
         }

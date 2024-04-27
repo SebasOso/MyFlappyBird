@@ -12,7 +12,6 @@ public class LoginScreenManager : MonoBehaviour
     public TMP_InputField passwordLoginField;
     public TMP_Text confirmLoginText;
     public TMP_Text warningLoginText;
-    [SerializeField] private GameObject loginAgainButtom;
 
     [Header("Register")]
     public TMP_InputField userRegisterField;
@@ -26,11 +25,6 @@ public class LoginScreenManager : MonoBehaviour
     [Header("Forget Password")]
     public TMP_InputField forgetPasswordEmail;
     public TMP_Text forgetPasswordWarning;
-    private void Start()
-    {
-        if(loginAgainButtom == null) { return; }
-        StartCoroutine(ReceiveFirebaseInfo());
-    }
     public void LoginButtom()
     {
         StartCoroutine(FirebaseManager.Instance.Login(
@@ -54,25 +48,9 @@ public class LoginScreenManager : MonoBehaviour
             checkRegister,
             warning));
     }
-    public void LoginAgainButton()
-    {
-        StartCoroutine(FirebaseManager.Instance.LoginAgain(confirmLoginText, warningLoginText));
-    }
     public void ForgetPasswordButton()
     {
         FirebaseManager.Instance.ForgetPasswordSubmit(forgetPasswordEmail.text, forgetPasswordWarning);
-    }
-    private IEnumerator ReceiveFirebaseInfo()
-    {
-        yield return new WaitForSeconds(1.5f);
-        if (FirebaseManager.Instance.logged == true)
-        {
-            loginAgainButtom.SetActive(true);
-        }
-        else
-        {
-            loginAgainButtom.SetActive(false);
-        }
     }
 
 }
